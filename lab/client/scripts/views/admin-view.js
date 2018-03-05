@@ -13,7 +13,7 @@ var app = app || {};
       event.preventDefault();
       let token = event.target.passphrase.value;
 
-      // COMMENT: Is the token cleared out of local storage? Do you agree or disagree with this structure?
+      // COMMENT: Is the token cleared out of local storage? Do you agree or disagree with this structure? yes and yes
       $.get(`${__API_URL__}/api/v1/admin`, {token})
         .then(res => {
           localStorage.token = true;
