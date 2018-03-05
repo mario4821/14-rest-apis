@@ -81,15 +81,15 @@ var app = app || {};
     })
   };
 
-// COMMENT: What is the purpose of this method?
+// COMMENT: What is the purpose of this method?To initiate the search form.
   bookView.initSearchFormPage = function() {
     resetView();
     $('.search-view').show();
     $('#search-form').on('submit', function(event) {
-      // COMMENT: What default behavior is being prevented here?
+      // COMMENT: What default behavior is being prevented here? For the form to refresh whenever a user refers to the form.
       event.preventDefault();
 
-      // COMMENT: What is the event.target, below? What will happen if the user does not provide the information needed for the title, author, or isbn properties?
+      // COMMENT: What is the event.target, below? What will happen if the user does not provide the information needed for the title, author, or isbn properties? This gets the information for the specific information entered in the search. If no information is provided then the space will be left empty.
       let book = {
         title: event.target.title.value || '',
         author: event.target.author.value || '',
@@ -98,31 +98,31 @@ var app = app || {};
 
       module.Book.find(book, bookView.initSearchResultsPage);
 
-      // COMMENT: Why are these values set to an empty string?
+      // COMMENT: Why are these values set to an empty string? To display as empty inially.
       event.target.title.value = '';
       event.target.author.value = '';
       event.target.isbn.value = '';
     })
   }
 
-  // COMMENT: What is the purpose of this method?
+  // COMMENT: What is the purpose of this method? To initialiaze the search results page.
   bookView.initSearchResultsPage = function() {
     resetView();
     $('.search-results').show();
     $('#search-list').empty();
 
-    // COMMENT: Explain how the .map() method is being used below.
+    // COMMENT: Explain how the .map() method is being used below. To extract the needed information from the search-list ID.
     module.Book.all.map(book => $('#search-list').append(book.toHtml()));
     $('.detail-button a').text('Add to list').attr('href', '/');
     $('.detail-button').on('click', function(e) {
-      // COMMENT: Explain the following line of code.
+      // COMMENT: Explain the following line of code.When one book is found the additional information is appended to it.
       module.Book.findOne($(this).parent().parent().parent().data('bookid'))
     });
   }
 
-  // COMMENT: Explain the following line of code. 
+  // COMMENT: Explain the following line of code. The module that invokes bookView.
   module.bookView = bookView;
   
-  // COMMENT: Explain the following line of code. 
+  // COMMENT: Explain the following line of code. The IFFE closing
 })(app)
 

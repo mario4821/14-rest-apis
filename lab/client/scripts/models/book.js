@@ -55,14 +55,14 @@ var __API_URL__ = 'http://localhost:3000';
     .then(() => page('/'))
     .catch(errorCallback)
 
-  // COMMENT: Where is this method invoked? What is passed in as the 'book' argument when invoked? What callback will be invoked after Book.loadAll is invoked?
+  // COMMENT: Where is this method invoked? What is passed in as the 'book' argument when invoked? What callback will be invoked after Book.loadAll is invoked? In book-view.js for the Search form. When invoked, this will go into the database to find the data.
   Book.find = (book, callback) =>
     $.get(`${__API_URL__}/api/v1/books/find`, book)
       .then(Book.loadAll)
       .then(callback)
       .catch(errorCallback)
 
-  // COMMENT: Where is this method invoked? How does it differ from the Book.find method, above?
+  // COMMENT: Where is this method invoked? How does it differ from the Book.find method, above? This is invoked in book-view.js and it differs cause this one searches for a single book.
   Book.findOne = isbn =>
     $.get(`${__API_URL__}/api/v1/books/find/${isbn}`)
     .then(Book.create)
